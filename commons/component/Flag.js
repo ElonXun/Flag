@@ -17,7 +17,8 @@ import TabBarNavigator from './TabBarNavigator';
 import Header from './Header';
 import { StackNavigator, TabNavigator } from 'react-navigation';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import Flaglocation from './AMap';
+import PostFlag from './PostFlag';
+
 //import AMap from 'react-native-smart-amap';
 //import AMapLocation from 'react-native-smart-amap-location';
 const {width: deviceWidth, height: deviceHeight} = Dimensions.get('window');
@@ -36,7 +37,7 @@ class FlagScreen extends Component{
            <Header />
            <TabBarNavigator />
            <Button
-             onPress={() => navigate('MapPage')}
+             onPress={() => navigate('PostPage')}
              title="Post new flag"
             />
         </View>
@@ -63,15 +64,7 @@ class PostScreen extends Component {
   render() {
     return (
       <View style={{flex:1}}>
-         <View style={styles.postWapper}>
-            <Text style={styles.postContent}>
-               到此一游...
-            </Text>
-            <View style={styles.location}>
-               <Icon name={'map-marker'} size={20} style={{marginRight:6,}} />
-               <Text >浙江科技学院</Text>
-            </View>
-         </View>
+          <PostFlag />
       </View>
     );
   }
@@ -101,25 +94,6 @@ const Flag = StackNavigator({
 
 export default Flag;
 
-const styles = StyleSheet.create({
-   postWapper: {
-      height:260,
-      backgroundColor:'white',
-   },
-
-   postContent: {
-      height:216,
-      padding:16,
-    //  backgroundColor:'green', 
-   },
-
-   location: {
-       flexDirection:'row',
-       paddingTop:8,
-       paddingLeft:16,
-       paddingRight:16,
-   },
-});
 
 
 
