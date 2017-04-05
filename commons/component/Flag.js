@@ -17,7 +17,7 @@ import TabBarNavigator from './TabBarNavigator';
 import Header from './Header';
 import { StackNavigator, TabNavigator } from 'react-navigation';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-//import Flaglocation from './Flaglocation';
+import Flaglocation from './AMap';
 //import AMap from 'react-native-smart-amap';
 //import AMapLocation from 'react-native-smart-amap-location';
 const {width: deviceWidth, height: deviceHeight} = Dimensions.get('window');
@@ -36,7 +36,7 @@ class FlagScreen extends Component{
            <Header />
            <TabBarNavigator />
            <Button
-             onPress={() => navigate('PostPage')}
+             onPress={() => navigate('MapPage')}
              title="Post new flag"
             />
         </View>
@@ -86,7 +86,7 @@ class MapScreen extends Component {
    render(){
       return(
           <View style={{flex:1}}>
-             
+             <Flaglocation />
           </View> 
       );
    }
