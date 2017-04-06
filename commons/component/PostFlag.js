@@ -18,13 +18,22 @@ import {
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import AppEventListenerEnhance from 'react-native-smart-app-event-listener-enhance';
 import AMapLocation from 'react-native-smart-amap-location';
-
+import AMap from 'react-native-smart-amap';
  
+
+const {width: deviceWidth, height: deviceHeight} = Dimensions.get('window')
+
 class PostFlag extends Component{
    
    constructor(props) {  
-      super(props);  
-      this.state = {AMapLoctionAddress: '加载中'} 
+      super(props)
+      this.state = {AMapLoctionAddress: '加载中'}
+      this._amap = null 
+      this._coordinate = {
+         latitude: '30.274089',
+         longitude: '120.15506900000003',
+      }
+
    } 
 
    componentDidMount() {
@@ -34,7 +43,6 @@ class PostFlag extends Component{
        )
       
       AMapLocation.init(null)//使用默认定位配置
-      //Alert.alert('--')
       //单次定位并返回逆地理编码信息
       AMapLocation.getReGeocode()
        //单次定位并返回地理编码信息
@@ -48,15 +56,39 @@ class PostFlag extends Component{
 
    render(){
       return(
-         <View style={styles.postWapper}>
-            <Text style={styles.postContent}>
-               到此一游...
-            </Text>
-            <View style={styles.location}>
-               <Icon name={'map-marker'} size={20} style={{marginRight:6,}} />
-               <Text >{this.state.AMapLoctionAddress}</Text>
-            </View>
-         </View>
+        <View style={{flex:1}}>
+           <View style={styles.postWapper}>
+              <Text style={styles.postContent}>
+                 到此一游...
+              </Text>
+              <View style={styles.location}>
+                 <Icon name={'map-marker'} size={20} style={{marginRight:6,}} />
+                 <Text >{this.state.AMapLoctionAddress}</Text>
+              </View>
+           </View>
+          
+             <AMap
+                 ref={ component => this._amap = component }
+                 style={{flex: 1, }}
+                 options={{
+                     frame: {
+                         width: deviceWidth,
+                        // height: (deviceHeight - 260)
+                     },
+                     showsUserLocation: true,
+                     userTrackingMode: Platform.OS == 'ios' ? AMap.constants.userTrackingMode.none : null,
+                     // centerCoordinate: {
+                     //     latitude: this._coordinate.latitude,
+                     //     longitude: this._coordinate.longitude,
+                     // },
+                     zoomLevel: 18.1,
+                     centerMarker: Platform.OS == 'ios' ? 'icon_location' : 'poi_marker',
+
+                 }}
+                 />
+
+           
+        </View>
       );
    }
 
@@ -66,10 +98,19 @@ class PostFlag extends Component{
         }
 
         else {
-        	let formattedAddress = `${result.POIName}...`
+        	let formattedAddress = `${result.POIName}`
+           Alert.alert(Platform.OS)
             this.setState({
             	AMapLoctionAddress: formattedAddress,
             })
+            this._coordinate = {
+              latitude: result.coordinate.latitude,
+              longitude: result.coordinate.longitude,
+            }
+            this._amap.setOptions({
+                zoomLevel: 18.1,
+            })
+            this._amap.setCenterCoordinate(this._coordinate)
             //Alert.alert(`格式化地址 = ${result.POIName}`)
             //Alert.alert(`格式化地址 = ${result.formattedAddress}`)
             //Alert.alert(`纬度 = ${result.coordinate.latitude}, 经度 = ${result.coordinate.longitude}`)

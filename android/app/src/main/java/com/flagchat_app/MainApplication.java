@@ -9,7 +9,10 @@ import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
 
+import com.reactnativecomponent.amap.RCTAMapPackage;
 import com.reactnativecomponent.amaplocation.RCTAMapLocationPackage;    //import package 
+
+import com.reactnativecomponent.swiperefreshlayout.RCTSwipeRefreshLayoutPackage;    //import package
 
 import java.util.Arrays;
 import java.util.List;
@@ -27,7 +30,9 @@ public class MainApplication extends Application implements ReactApplication {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
             new VectorIconsPackage(),
-              new RCTAMapLocationPackage()  //register Module
+              new RCTAMapPackage(),
+                new RCTAMapLocationPackage(),
+                  new RCTSwipeRefreshLayoutPackage()  //register Module
       );
     }
   };

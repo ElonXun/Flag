@@ -134,6 +134,10 @@ dependencies {
     compile "com.facebook.react:react-native:+"  // From node_modules
     // From node_modules
     compile project(':react-native-smart-amap-location')
+     // From node_modules
+    compile project(':react-native-smart-amap')
+    // From node_modules
+    compile project(':react-native-smart-swipe-refresh-layout')
     // compile 'com.amap.api:map2d:4.2.0' //高德地图
     // compile 'com.amap.api:location:3.3.0'
     // compile 'com.amap.api:search:4.0.0'

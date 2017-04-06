@@ -13,6 +13,8 @@
     "react-native-smart-amap-location": "^1.1.3",
     "react-native-smart-app-event-listener-enhance": "^1.1.1",
     "react-native-smart-button": "^1.5.0",
+    "react-native-smart-pull-to-refresh-listview": "^1.6.10",
+    "react-native-smart-timer-enhance": "^1.0.3",
     "react-native-swiper": "^1.5.4",
     "react-native-tab-navigator": "^0.3.3",
     "react-native-vector-icons": "^4.0.0",
