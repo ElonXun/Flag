@@ -66,7 +66,6 @@ class PostFlag extends Component{
                  <Text >{this.state.AMapLoctionAddress}</Text>
               </View>
            </View>
-          
              <AMap
                  ref={ component => this._amap = component }
                  style={{flex: 1, }}
@@ -85,9 +84,9 @@ class PostFlag extends Component{
                      centerMarker: Platform.OS == 'ios' ? 'icon_location' : 'poi_marker',
 
                  }}
-                 />
-
-           
+                 onLayout={this._onLayout}
+                 //visible={'false'}
+                 />          
         </View>
       );
    }
@@ -99,7 +98,7 @@ class PostFlag extends Component{
 
         else {
         	let formattedAddress = `${result.POIName}`
-           Alert.alert(Platform.OS)
+          // Alert.alert(Platform.OS)
             this.setState({
             	AMapLoctionAddress: formattedAddress,
             })
@@ -117,6 +116,10 @@ class PostFlag extends Component{
         }
 
     }
+
+    // _onShowMap=()=>{
+    //   Alert.alert('aaa');
+    // }
 }
 
 
