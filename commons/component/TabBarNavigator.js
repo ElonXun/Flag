@@ -15,10 +15,7 @@ import {
         StatusBar 
 } from 'react-native';
 
-import Header from './Header';
-import TabSwiper from './TabSwiper';
-import FlagContent from './FlagContent';
-import CutLine from './CutLine';
+import FlagList from './FlagList';
 
 const FLAG_NORMAL= 'home';
 const REPLY_NORMAL= 'bell';
@@ -34,7 +31,7 @@ export default class TabBarNavigator extends Component {
     constructor(props) {  
       super(props);  
       this.state = {selectedTab: FLAG}
- } 
+   } 
 
   render() {
     return (
@@ -61,21 +58,18 @@ export default class TabBarNavigator extends Component {
    }
 
    _createChildView(tag) { 
-
        if (tag =='flag'){
-            return (  
-//            <View style={{flex:1,backgroundColor:'#00baff',alignItems:'center',justifyContent:'center'}}>  
-//                <Text style={{fontSize:22}}>{tag}</Text>  
-//            </View>  
-              <View style={{flex:1,flexDirection:'column',}}>
-                   <TabSwiper />
-                   <FlagContent />
-                   <CutLine />
-                   
-              </View>
+          return (  
+            <FlagList />
           )  
-       }else{
-          return(<Text style={{fontSize:22}}>{tag}</Text> )
+       }else if (tag == 'reply'){
+          return(
+             <Text style={{fontSize:22}}>{tag}</Text> 
+          )
+       }else {
+           return(
+             <Text style={{fontSize:22}}>{tag}</Text> 
+           )
        }  
       
    }  
@@ -85,7 +79,7 @@ export default class TabBarNavigator extends Component {
 const styles = StyleSheet.create({  
    tab: {  
         height: 56,  
-        backgroundColor: '#F0F8FF',  
+        backgroundColor: 'white',  
         alignItems: 'center',
         paddingTop:8,
         //paddingBottom:16,

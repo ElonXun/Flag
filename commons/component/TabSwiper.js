@@ -19,8 +19,11 @@ const BANNER_IMGS = [
 ]; 
 
 export default class TabSwiper extends Component{
-   
-   
+
+   constructor(props){
+      super(props)
+   }
+
    render(){
       return(
          <View >

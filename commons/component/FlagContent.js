@@ -3,43 +3,57 @@
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 //import SubMenu from './SubMenu';
 
-import React, { Component } from 'react';
+import React, { Component,PropTypes, } from 'react';
 import {
 	    View,
         Text, 
         Image, 
         StyleSheet, 
-        Dimensions, 
+        Dimensions,
+        Alert,  
         } from 'react-native';
 
-export default class FlagContent extends Component{
+const propTypes ={
+    //Flag的数据源  对象
+    // data:PropTypes.shape({
+    //   test: PropTypes.string.isRequired,
+    // }).isRequired,
+    // a:PropTypes.string.isRequired,
+}
+
+class FlagContent extends Component{
+
+    constructor(props){
+      super(props)
+    }
+    
+
     render(){
+      //const { test,a } = this.props;
     	return(
             <View style={styles.wapper}>
                 <View style={styles.top}>
                      <Image style={styles.headImg} source={require('../../logo.png')}/>
                      <View style={styles.headTitle} >
                         <Text style={styles.nickNameAndLocation}>
-                          Elon Xu &nbsp;
+                           {this.props.nickName} &nbsp;
                           <Icon name={'map-marker-radius'} size={16}/>
-                          &nbsp;5km
+                          &nbsp;{this.props.poiName} {this.props.test}
                         </Text>
                          <Text style={styles.time}>
-                           3月12日 11:20
+                           {this.props.postData}
                         </Text>
                      </View>
                 </View>
                 <View style={styles.middle}>
                      <Text >
-                       公司司机大家啊啥的喀什的死打扫打扫打扫的死打扫打扫的
-                       死打扫大啊死大啊死打扫啊啊死打扫啊死大啊死大啊死打扫撒
-                       啊死的啊死啊的啊死大啊死啊啊的啊死啊死的啊死撒啊死啊撒
+                       {this.props.flagContent}
                      </Text>
                 </View>
                 <View style={styles.loveBtnAndCommetBtn}>
                    <Icon name={'heart'} size={20} style={{color:'#DC143C',}} />
                    <Text>
-                      &nbsp;200
+                      &nbsp;{this.props.loveNum}
                    </Text>
                    <Icon name={'comment'} size={20} style={{position:'absolute',right:16,}}/>
                 </View>
@@ -124,3 +138,7 @@ const styles=StyleSheet.create({
 
     
 });
+
+FlagContent.PropTypes=propTypes;
+export default FlagContent;
+
