@@ -64,12 +64,10 @@ class FlagListScreen extends Component {
         }
   }
 
-
   render(){
        //const { navigate } = this.props.navigation;
 		return(
          <View style={{flex:1}}>
-              <TabSwiper />
               <PullToRefreshListView
                 ref={ (component) => this._pullToRefreshListView = component }
                 viewType={PullToRefreshListView.constants.viewType.listView}
@@ -89,22 +87,28 @@ class FlagListScreen extends Component {
                 pullUpStayDistance={50}
                 pullDownDistance={35}
                 pullDownStayDistance={50}
+                removeClippedSubviews={false}
                />
-             <ActionButton icon='plus' 
+            <ActionButton icon='plus' 
                  style={{container:{backgroundColor:'#6495ED'}}}
                 // onPress={() => navigate('PostPage')} 
                  />
          </View>         
-      
 		);
 	}
 
    _renderRow = (rowData, sectionID, rowID) => {
-          return (
-            <View style={styles.thumbnail}>
-              <FlagContent {...rowData} />
-            </View>
-          )
+          if(rowID=='0'){
+             return (
+               <TabSwiper />
+              ) 
+            }else {
+                return (
+                  <View style={styles.thumbnail}>
+                     <FlagContent {...rowData} />
+                  </View>
+                ) 
+            }         
     }
 
     _renderHeader = (viewState) => {
@@ -233,7 +237,7 @@ class FlagListScreen extends Component {
                    dataSource: this._dataSource.cloneWithRows(newDataList),
                })
             }
-        }, 2000)
+        }, 3000)
     }
 
     _renderActivityIndicator() {

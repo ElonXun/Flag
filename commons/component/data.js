@@ -1,6 +1,10 @@
 'use strict';
 
 const flagData=[
+    {
+        "pic":"111.jpg"
+    }
+    ,
 	{
         "_id":"130000200610086661","flagContent":"wimbholy","head":"http://dummyimage.com/20×20/571fea)","loveNum":200,"nickName":"dci","poiName":"ovqbqbfcud","postData":"1974-05-18"
     }
