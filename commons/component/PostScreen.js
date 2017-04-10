@@ -31,7 +31,7 @@ export default class PostScreen extends Component {
       <View style={{flex:1}}>
           <PostFlag />
           <Button
-             onPress={() => navigate('MapScreen')}
+             onPress={() => navigate('FlagPage')}
              title="Post new flag"
             />
       </View>

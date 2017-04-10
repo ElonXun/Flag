@@ -15,7 +15,7 @@ import {
         StatusBar 
 } from 'react-native';
 
-import FlagList from './FlagList';
+import Flag from './Flag';
 
 const FLAG_NORMAL= 'home';
 const REPLY_NORMAL= 'bell';
@@ -60,7 +60,7 @@ export default class TabBarNavigator extends Component {
    _createChildView(tag) { 
        if (tag =='flag'){
           return (  
-            <FlagList />
+            <Flag />
           )  
        }else if (tag == 'reply'){
           return(
