@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 import {
-	    View,
+	      View,
         Text, 
         ListView, 
         Image, 

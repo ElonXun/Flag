@@ -13,6 +13,8 @@ import com.reactnativecomponent.amap.RCTAMapPackage;
 import com.reactnativecomponent.amaplocation.RCTAMapLocationPackage;    //import package 
 
 import com.reactnativecomponent.swiperefreshlayout.RCTSwipeRefreshLayoutPackage;    //import package
+import com.aakashns.reactnativedialogs.ReactNativeDialogsPackage;
+
 
 import java.util.Arrays;
 import java.util.List;
@@ -32,7 +34,8 @@ public class MainApplication extends Application implements ReactApplication {
             new VectorIconsPackage(),
               new RCTAMapPackage(),
                 new RCTAMapLocationPackage(),
-                  new RCTSwipeRefreshLayoutPackage()  //register Module
+                  new RCTSwipeRefreshLayoutPackage(),  //register Module
+                    new ReactNativeDialogsPackage() // add this manager
       );
     }
   };

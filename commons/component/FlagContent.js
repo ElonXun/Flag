@@ -1,7 +1,14 @@
 'use strict';
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-//import SubMenu from './SubMenu';
+import DialogAndroid from 'react-native-dialogs';
+import { MenuContext,
+         Menu,
+         MenuOptions,
+         MenuOption,
+         MenuTrigger, 
+} from 'react-native-popup-menu';
+
 
 import React, { Component,PropTypes, } from 'react';
 import {
@@ -10,7 +17,8 @@ import {
         Image, 
         StyleSheet, 
         Dimensions,
-        Alert,  
+        Alert,
+        TouchableNativeFeedback,  
         } from 'react-native';
 
 const propTypes ={
@@ -30,6 +38,8 @@ class FlagContent extends Component{
 
     render(){
       //const { test,a } = this.props;
+      
+
     	return(
             <View style={styles.wapper}>
                 <View style={styles.top}>
@@ -37,12 +47,25 @@ class FlagContent extends Component{
                      <View style={styles.headTitle} >
                         <Text style={styles.nickNameAndLocation}>
                            {this.props.nickName} &nbsp;
-                          <Icon name={'map-marker-radius'} size={16}/>
+                          <Icon name={'map-marker-radius'} size={20}/>
                           &nbsp;{this.props.poiName} {this.props.test}
                         </Text>
                          <Text style={styles.time}>
                            {this.props.postData}
                         </Text>
+                     </View>
+                     <View style={styles.operation}>
+                         <Menu onSelect={value => alert(`Selected number: ${value}`)}>
+                             <MenuTrigger >
+                                <Icon name={'dots-vertical'} size={20}/>
+                             </MenuTrigger>
+                             <MenuOptions>
+                                <MenuOption value={1} text='举报' />
+                                <MenuOption value={2}>
+                                  <Text style={{color: 'red'}}>删除</Text>
+                                </MenuOption>
+                             </MenuOptions>
+                          </Menu>
                      </View>
                 </View>
                 <View style={styles.middle}>
@@ -75,8 +98,10 @@ class FlagContent extends Component{
     }
 }
 
+
 const styles=StyleSheet.create({
 	// <Icon name={'dots-vertical'} size={20} style={{position:'absolute',right:16,top:15}}/>
+
     wapper:{
       // flex:1,
        flexDirection:'column',
@@ -109,8 +134,15 @@ const styles=StyleSheet.create({
     	flexDirection:'column',
         //backgroundColor:'red',
         marginLeft:8,
+       // width:300,
     },
     
+    operation:{
+        position:'absolute',
+        right:16,
+        top:16,
+    },
+
     middle:{
     	flexDirection:'column',
     	//alignSelf:'baseline',

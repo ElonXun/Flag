@@ -5,19 +5,25 @@ import React, { Component } from 'react';
 import { View, StyleSheet, Image} from 'react-native';
 
 import { ThemeProvider } from 'react-native-material-ui';
+import { MenuContext } from 'react-native-popup-menu';
 //import TabBarNavigator from './commons/component/TabBarNavigator';
 import Main from './commons/component/Main';
-//import Test from './commons/component/Test';
+//import List from './commons/component/list/List';
 
 
 export default class App extends Component {
   render() {
     return (
-     <ThemeProvider>
-      <View style={{flex:1}}>
-         <Main />
-      </View>
-     </ThemeProvider>
+        <ThemeProvider>
+          <MenuContext>
+           <View style={{flex:1}}>
+              <Main />
+           </View>
+          </MenuContext>
+        </ThemeProvider>
     );
   }
 }
+
+
+    
