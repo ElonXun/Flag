@@ -16,6 +16,7 @@ import {
 } from 'react-native';
 
 import Flag from './Flag';
+import Reply from './Reply'; 
 
 const FLAG_NORMAL= 'home';
 const REPLY_NORMAL= 'bell';
@@ -64,8 +65,8 @@ export default class TabBarNavigator extends Component {
           )  
        }else if (tag == 'reply'){
           return(
-             <Text style={{fontSize:22}}>{tag}</Text> 
-          )
+              <Reply />
+           )
        }else {
            return(
              <Text style={{fontSize:22}}>{tag}</Text> 
