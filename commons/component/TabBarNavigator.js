@@ -15,8 +15,8 @@ import {
         StatusBar 
 } from 'react-native';
 
-import Flag from './Flag';
-import Reply from './Reply'; 
+import ReplyNavigator from './ReplyNavigator'; 
+import FlagNavigator from './FlagNavigator'; 
 
 const FLAG_NORMAL= 'home';
 const REPLY_NORMAL= 'bell';
@@ -28,7 +28,7 @@ const MY='my';
 
 
 
-export default class TabBarNavigator extends Component {
+class TabBarNavigator extends Component {
     constructor(props) {  
       super(props);  
       this.state = {selectedTab: FLAG}
@@ -61,11 +61,11 @@ export default class TabBarNavigator extends Component {
    _createChildView(tag) { 
        if (tag =='flag'){
           return (  
-            <Flag />
+            <FlagNavigator />
           )  
        }else if (tag == 'reply'){
           return(
-              <Reply />
+              <ReplyNavigator />
            )
        }else {
            return(
@@ -75,7 +75,6 @@ export default class TabBarNavigator extends Component {
       
    }  
 }
-
 
 const styles = StyleSheet.create({  
    tab: {  
@@ -99,3 +98,5 @@ const styles = StyleSheet.create({
    },
 
 });  
+
+export default TabBarNavigator;

@@ -13,10 +13,12 @@ import {
         ProgressBarAndroid,
         ActivityIndicatorIOS,
         Platform,
-        NativeModules, 
+        NativeModules,
+        TouchableNativeFeedback, 
 } from 'react-native';
 
-import { StackNavigator,NavigationActions } from 'react-navigation';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+//import { StackNavigator,NavigationActions } from 'react-navigation';
 import { BottomNavigation,COLOR,Badge,ActionButton } from 'react-native-material-ui';
 //import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import TimerEnhance from 'react-native-smart-timer-enhance';
@@ -36,8 +38,24 @@ const propTypes = {
 
 class FlagListScreen extends Component {
    static navigationOptions = {
-    //title: 'Home',
-   }
+        header:(navigation, defaultHeader)=>({
+        //  visible:false,
+          title:'Flagchat',
+          style:{
+             height:48,
+             backgroundColor:'#6495ED',
+          },
+          tintColor:'white',
+          right:(
+           <TouchableNativeFeedback onPress={() => navigation.navigate('PostPage')}
+              background={TouchableNativeFeedback.SelectableBackground()}>
+            <View style={{marginRight:16,}} >
+              <Icon size={24} name='bell' style={{color:'white',}}/>
+            </View>
+          </TouchableNativeFeedback>
+         ),
+        }),
+    }
 
    constructor(props){
       super(props)

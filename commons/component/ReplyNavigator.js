@@ -16,10 +16,10 @@ import { TabNavigator } from "react-navigation";
 
 class ReplyScreen extends Component{
     
-	constructor(props){
+	  constructor(props){
       super(props)
     }
-    
+
     render(){
     	return(
             <View style={{flex:1}}>
@@ -51,6 +51,17 @@ class MessageScreen extends Component{
 const ReplyNavigator = TabNavigator({
   Reply: { screen: ReplyScreen },
   Message: { screen: MessageScreen },
+},{
+  tabBarOptions: {
+    //activeTintColor:'#e91e63',
+    indicatorStyle:{
+       backgroundColor:'white',
+    },
+    style: {
+      backgroundColor :'#6495ED',
+    },
+    upperCaseLabel:false,
+  },
 });
 
 export default  ReplyNavigator;
