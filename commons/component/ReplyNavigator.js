@@ -12,40 +12,8 @@ import {
         } from 'react-native';
 
 import { TabNavigator } from "react-navigation";
-
-
-class ReplyScreen extends Component{
-    
-	  constructor(props){
-      super(props)
-    }
-
-    render(){
-    	return(
-            <View style={{flex:1}}>
-                 <Text>回复</Text>
-            </View>
-    	);
-    }
-
-}
-
-
-class MessageScreen extends Component{
-
-	constructor(props){
-      super(props)
-    }
-    
-    render(){
-    	return(
-            <View style={{flex:1}}>
-                 <Text>消息</Text>
-            </View>
-    	);
-    }
-
-}
+import ReplyScreen from './ReplyScreen';
+import MessageScreen from './MessageScreen';
 
 
 const ReplyNavigator = TabNavigator({

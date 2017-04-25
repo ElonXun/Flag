@@ -10,6 +10,7 @@
     "react": "15.4.2",
     "react-native": "0.40.0",
     "react-native-dialogs": "0.0.19",
+    "react-native-elements": "^0.11.1",
     "react-native-material-ui": "^1.8.0",
     "react-native-popup-menu": "^0.7.3",
     "react-native-smart-amap": "^1.0.4",

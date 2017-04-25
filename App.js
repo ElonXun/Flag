@@ -7,7 +7,7 @@ import { View, StyleSheet, Image, StatusBar } from 'react-native';
 import { ThemeProvider } from 'react-native-material-ui';
 import { MenuContext } from 'react-native-popup-menu';
 import TabBarNavigator from './commons/component/TabBarNavigator';
-//import List from './commons/component/list/List';
+//import List from './commons/component/List';
 
 
 export default class App extends Component {

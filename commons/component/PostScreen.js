@@ -2,8 +2,9 @@
 
 import React, { Component } from 'react';
 import {
-	    View,
-        Text,Button,
+	      View,
+        Text,
+        Button,
 } from 'react-native';
 
 import PostFlag from './PostFlag';

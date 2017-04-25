@@ -31,7 +31,7 @@ const MY='my';
 class TabBarNavigator extends Component {
     constructor(props) {  
       super(props);  
-      this.state = {selectedTab: FLAG}
+      this.state = {selectedTab: REPLY}
    } 
 
   render() {
