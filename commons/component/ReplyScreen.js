@@ -51,7 +51,7 @@ import { List, ListItem } from 'react-native-elements'
     //Using ListView
     render() {
         return (
-         // <List>
+          <View style={{flex:1,backgroundColor :'white'}}>
             <PullToRefreshListView
                 ref={ (component) => this._pullToRefreshListView = component }
                 viewType={PullToRefreshListView.constants.viewType.listView}
@@ -72,23 +72,23 @@ import { List, ListItem } from 'react-native-elements'
                 pullDownDistance={35}
                 pullDownStayDistance={50}
             />
-          //</List>
-        )
+          </View>
+        );
 
     }
 
     _renderRow = (rowData, sectionID, rowID) => {
         return (
             <ListItem
-      roundAvatar
-      key={sectionID}
-      title={rowData.title}
-       subtitle={rowData.subtitle}
-       avatar={{uri:rowData.avatar_url}}
-       //rightIcon={{name:'chevron-right'}}
-       hideChevron={true}
-      // onPress={() => {Alert.alert(`${replyList[1].title}`)}}
-    />
+                roundAvatar
+                key={sectionID}
+                title={rowData.title}
+                 subtitle={rowData.subtitle}
+                 avatar={{uri:rowData.avatar_url}}
+                 //rightIcon={{name:'chevron-right'}}
+                 hideChevron={true}
+                // onPress={() => {Alert.alert(`${replyList[1].title}`)}}
+              />
         )
     }
 

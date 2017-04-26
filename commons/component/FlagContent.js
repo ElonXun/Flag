@@ -1,24 +1,20 @@
 'use strict';
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import DialogAndroid from 'react-native-dialogs';
-import { MenuContext,
-         Menu,
-         MenuOptions,
-         MenuOption,
-         MenuTrigger, 
-} from 'react-native-popup-menu';
-
+import { Menu,Button } from 'teaset';
+import { ListItem } from 'react-native-elements';
 
 import React, { Component,PropTypes, } from 'react';
 import {
-	    View,
+	      View,
         Text, 
         Image, 
         StyleSheet, 
         Dimensions,
         Alert,
-        TouchableNativeFeedback,  
+        TouchableNativeFeedback,
+        TouchableOpacity,
+        measureInWindow,  
         } from 'react-native';
 
 const propTypes ={
@@ -31,14 +27,28 @@ const propTypes ={
 
 class FlagContent extends Component{
 
+
+
     constructor(props){
       super(props)
+      this.state={content:'默认'}
     }
     
+    
+    show(view, align, id) {
+      view.measureInWindow((x, y, width, height) => {
+         y=y - 23
+        let items = [
+          {title: '举报', icon: 'empty', onPress: () => alert(typeof y)},
+          {title: '删除', icon: 'empty', onPress: () => alert('Edit')},
+          {title: `${id}`, icon: 'none', onPress: () => alert('Remove')},
+        ];
+        Menu.show({x, y, width, height}, items, {align});
+      });
+    }
 
     render(){
       //const { test,a } = this.props;
-      
 
     	return(
             <View style={styles.wapper}>
@@ -55,17 +65,10 @@ class FlagContent extends Component{
                         </Text>
                      </View>
                      <View style={styles.operation}>
-                         <Menu onSelect={value => alert(`Selected number: ${value}`)}>
-                             <MenuTrigger >
-                                <Icon name={'dots-vertical'} size={20}/>
-                             </MenuTrigger>
-                             <MenuOptions>
-                                <MenuOption value={1} text='举报' />
-                                <MenuOption value={2}>
-                                  <Text style={{color: 'red'}}>删除</Text>
-                                </MenuOption>
-                             </MenuOptions>
-                          </Menu>
+                        <TouchableOpacity 
+                          ref='btn' onPress={() => this.show(this.refs['btn'], 'end',this.props._id)} >
+                           <Icon name={'dots-vertical'} size={20}/>
+                        </TouchableOpacity>
                      </View>
                 </View>
                 <View style={styles.middle}>
@@ -100,8 +103,6 @@ class FlagContent extends Component{
 
 
 const styles=StyleSheet.create({
-	// <Icon name={'dots-vertical'} size={20} style={{position:'absolute',right:16,top:15}}/>
-
     wapper:{
       // flex:1,
        flexDirection:'column',
@@ -167,7 +168,9 @@ const styles=StyleSheet.create({
        paddingRight:16,
        //backgroundColor:'pink',
     },
-
+    popoverStyle:{
+      backgroundColor:'blue',
+    },
     
 });
 
