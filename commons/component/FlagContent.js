@@ -37,11 +37,11 @@ class FlagContent extends Component{
     
     show(view, align, id) {
       view.measureInWindow((x, y, width, height) => {
-         y=y - 23
+         y=y - 28
         let items = [
-          {title: '举报', icon: 'empty', onPress: () => alert(typeof y)},
-          {title: '删除', icon: 'empty', onPress: () => alert('Edit')},
-          {title: `${id}`, icon: 'none', onPress: () => alert('Remove')},
+          {title: '举报         ', icon: 'empty', onPress: () => alert(typeof y)},
+          {title: '删除         ', icon: 'empty', onPress: () => alert('Edit')},
+         // {title: `${id}`, icon: 'none', onPress: () => alert('Remove')},
         ];
         Menu.show({x, y, width, height}, items, {align});
       });
