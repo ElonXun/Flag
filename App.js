@@ -7,7 +7,7 @@ import {Theme} from 'teaset';
 import { ThemeProvider } from 'react-native-material-ui';
 import TabBarNavigator from './commons/component/TabBarNavigator';
 import BottomNavigator from './commons/component/BottomNavigator';
-
+import Navigator from './commons/component/Navigator';
 
 export default class App extends Component {
   render() {

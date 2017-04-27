@@ -2,7 +2,7 @@
 
 import React, { Component,PropTypes, } from 'react';
 import {
-	    View,
+	      View,
         Text, 
         Image, 
         StyleSheet, 

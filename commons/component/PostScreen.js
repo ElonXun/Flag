@@ -26,6 +26,15 @@ export default class PostScreen extends Component {
     	),
     }
   };
+
+  componentWillMount () {
+    this.props.screenProps.tabBar.hide()
+  }
+
+  componentWillUnmount () {
+    this.props.screenProps.tabBar.show()
+  }
+
   render() {
     const { navigate } = this.props.navigation;
     return (

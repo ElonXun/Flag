@@ -50,7 +50,7 @@ class FlagListScreen extends Component {
            <TouchableNativeFeedback onPress={() => navigation.navigate('PostPage')}
               background={TouchableNativeFeedback.SelectableBackground()}>
             <View style={{marginRight:16,}} >
-              <Icon size={24} name='bell' style={{color:'white',}}/>
+              <Icon size={24} name='telegram' style={{color:'white',}}/>
             </View>
           </TouchableNativeFeedback>
          ),
@@ -82,6 +82,14 @@ class FlagListScreen extends Component {
         }
   }
 
+  componentWillMount () {
+    //this.props.screenProps.tabBar.hide()
+  }
+
+  componentWillUnmount () {
+   // this.props.screenProps.tabBar.show()
+  }
+  
   render(){
        //const { navigate } = this.props.navigation;
 		return(
@@ -218,7 +226,7 @@ class FlagListScreen extends Component {
             })
             this._pullToRefreshListView.endRefresh()
 
-        }, 2000)
+        }, 100)
     }
 
     _onLoadMore = () => {
@@ -252,7 +260,7 @@ class FlagListScreen extends Component {
                    dataSource: this._dataSource.cloneWithRows(newDataList),
                })
             }
-        }, 3000)
+        }, 100)
     }
 
     _renderActivityIndicator() {

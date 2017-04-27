@@ -25,7 +25,7 @@ import flagData from './data';
 import { List, ListItem } from 'react-native-elements'
 
  class ReplyScreen extends Component {
-
+      
     // 构造
       constructor(props) {
         super(props);
@@ -83,11 +83,16 @@ import { List, ListItem } from 'react-native-elements'
                 roundAvatar
                 key={sectionID}
                 title={rowData.title}
-                 subtitle={rowData.subtitle}
-                 avatar={{uri:rowData.avatar_url}}
-                 //rightIcon={{name:'chevron-right'}}
-                 hideChevron={true}
-                // onPress={() => {Alert.alert(`${replyList[1].title}`)}}
+                subtitle={rowData.subtitle}
+                avatar={{uri:rowData.avatar_url}}
+                subtitleStyle={{fontWeight:'normal'}}
+               // wrapperStyle={{ height:60}}
+                //avatarStyle={{ height:56, width:56}}
+                // subtitleContainerStyle={{ marginLeft:72}}
+                // titleContainerStyle={{ marginLeft:72}}
+                //rightIcon={{name:'chevron-right'}}
+                hideChevron={true}
+                onPress={() => {Alert.alert(`${replyList[1].title}`)}}
               />
         )
     }

@@ -39,8 +39,8 @@ class FlagContent extends Component{
       view.measureInWindow((x, y, width, height) => {
          y=y - 28
         let items = [
-          {title: '举报         ', icon: 'empty', onPress: () => alert(typeof y)},
-          {title: '删除         ', icon: 'empty', onPress: () => alert('Edit')},
+          {title: '举报                     ', icon: 'empty', onPress: () => alert(typeof y)},
+          {title: '删除                     ', icon: 'empty', onPress: () => alert('Edit')},
          // {title: `${id}`, icon: 'none', onPress: () => alert('Remove')},
         ];
         Menu.show({x, y, width, height}, items, {align});
@@ -57,7 +57,7 @@ class FlagContent extends Component{
                      <View style={styles.headTitle} >
                         <Text style={styles.nickNameAndLocation}>
                            {this.props.nickName} &nbsp;
-                          <Icon name={'map-marker-radius'} size={20}/>
+                          <Icon name={'map-marker'} size={20}/>
                           &nbsp;{this.props.poiName} {this.props.test}
                         </Text>
                          <Text style={styles.time}>
