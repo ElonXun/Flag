@@ -5,7 +5,7 @@ import React, { Component,PropTypes, } from 'react';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import {
-       View,
+        View,
         Text, 
         Image, 
         StyleSheet, 
@@ -16,9 +16,28 @@ import {
 
 import ReplyNavigator from './ReplyNavigator'; 
 import FlagNavigator from './FlagNavigator'; 
+import Flag from './Flag';
 
 class BottomNavigator extends Component {
-
+  static navigationOptions = {
+        header:(navigation, defaultHeader)=>({
+          visible:false,
+         //  title:'Flagchat',
+         //  style:{
+         //     height:48,
+         //     backgroundColor:'#6495ED',
+         //  },
+         //  tintColor:'white',
+         //  right:(
+         //   <TouchableNativeFeedback onPress={() => navigation.navigate('PostScreen')}
+         //      background={TouchableNativeFeedback.SelectableBackground()}>
+         //    <View style={{marginRight:16,}} >
+         //      <Icon size={24} name='telegram' style={{color:'white',}}/>
+         //    </View>
+         //  </TouchableNativeFeedback>
+         // ),
+        }),
+    }
    constructor() {
      super()
      this.state = {
@@ -41,7 +60,8 @@ class BottomNavigator extends Component {
    }
  
    render(){
-      const { selectedTab } = this.state
+      const { selectedTab } = this.state;
+      const { navigation } = this.props;
       return(
          <View style={{flex:1}}>
              <Tabs tabBarStyle={{height: this.state.tabBarHeight , overflow :this.state.overflow}}
@@ -54,11 +74,12 @@ class BottomNavigator extends Component {
                  renderIcon={() => <Icon containerStyle={{justifyContent: 'center', alignItems: 'center', marginTop: 8 }} color={'#6F6F6F'} name='home' size={24} />}
                  renderSelectedIcon={() => <Icon color={'#6296f9'} name='home' size={26} />}
                  onPress={() => this.changeTab('home')}>
-                 <FlagNavigator 
-                      screenProps={{tabBar: {
-                                             hide: () => this.handleTabBar(false),
-                                             show: () => this.handleTabBar(true),
-                                           }}}/>
+                 <Flag  navigation={navigation}
+                      // screenProps={{tabBar: {
+                      //                        hide: () => this.handleTabBar(false),
+                      //                        show: () => this.handleTabBar(true),
+                      //                      }}}
+                                           />
                </Tab>
                <Tab
                  titleStyle={{fontWeight: 'bold', fontSize: 10, marginTop: -1 , marginBottom: 6}}
@@ -77,7 +98,11 @@ class BottomNavigator extends Component {
                   title={selectedTab === 'my' ? 'My' : 'My'}
                   renderIcon={() => <Icon containerStyle={{justifyContent: 'center', alignItems: 'center', marginTop: 8}} color={'#6F6F6F'} name='account' size={24} />}
                   renderSelectedIcon={() => <Icon color={'#6296f9'} name='account' size={26} />}
-                  onPress={() => this.changeTab('my')} 
+                  onPress={() => 
+                    this.changeTab('my') 
+                   // this.props.navigation.navigate('PostScreen')
+                       // Alert.alert('111')
+                  } 
                   >
                   <Text>
                       none

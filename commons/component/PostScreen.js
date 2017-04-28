@@ -28,11 +28,11 @@ export default class PostScreen extends Component {
   };
 
   componentWillMount () {
-    this.props.screenProps.tabBar.hide()
+//    this.props.screenProps.tabBar.hide()
   }
 
   componentWillUnmount () {
-    this.props.screenProps.tabBar.show()
+   // this.props.screenProps.tabBar.show()
   }
 
   render() {

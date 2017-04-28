@@ -7,7 +7,7 @@ import {Theme} from 'teaset';
 import { ThemeProvider } from 'react-native-material-ui';
 import TabBarNavigator from './commons/component/TabBarNavigator';
 import BottomNavigator from './commons/component/BottomNavigator';
-import Navigator from './commons/component/Navigator';
+import MainNavigator from './commons/component/MainNavigator';
 
 export default class App extends Component {
   render() {
@@ -25,7 +25,7 @@ export default class App extends Component {
               <StatusBar 
                    backgroundColor = '#4169E1' 
                    opacity = '0.5'/>
-              <BottomNavigator />
+              <MainNavigator />
            </View>
         </ThemeProvider>
     );

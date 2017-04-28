@@ -24,7 +24,23 @@ import AMap from 'react-native-smart-amap';
 const {width: deviceWidth, height: deviceHeight} = Dimensions.get('window')
 
 class PostFlag extends Component{
-   
+  
+   static navigationOptions = {
+   // title: 'Chat with Lucy',
+    header:{
+      style:{
+        height:48,
+        backgroundColor:'#6495ED',
+      },
+      tintColor:'white',
+      right:(
+           <Text style={{marginRight:16,color:'white',}}>
+               发布
+           </Text>
+      ),
+    }
+  };
+
    constructor(props) {  
       super(props)
       this.state = {AMapLoctionAddress: '加载中'}

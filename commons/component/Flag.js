@@ -14,7 +14,8 @@ import {
         ActivityIndicatorIOS,
         Platform,
         NativeModules,
-        TouchableNativeFeedback, 
+        TouchableNativeFeedback,
+        Button, 
 } from 'react-native';
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -28,34 +29,35 @@ import PostScreen from './PostScreen';
 import FlagContent from './FlagContent';
 import flagData from './data';
 import TabSwiper from './TabSwiper';
+import Header from './Header';
 
 const UIManager = NativeModules.UIManager;
 const propTypes = {
-    //navigator: PropTypes.object.isRequired,
+    navigator: PropTypes.object,
     //route: PropTypes.object.isRequired,
     //style:{},
 };
 
 class FlagListScreen extends Component {
-   static navigationOptions = {
-        header:(navigation, defaultHeader)=>({
-        //  visible:false,
-          title:'Flagchat',
-          style:{
-             height:48,
-             backgroundColor:'#6495ED',
-          },
-          tintColor:'white',
-          right:(
-           <TouchableNativeFeedback onPress={() => navigation.navigate('PostPage')}
-              background={TouchableNativeFeedback.SelectableBackground()}>
-            <View style={{marginRight:16,}} >
-              <Icon size={24} name='telegram' style={{color:'white',}}/>
-            </View>
-          </TouchableNativeFeedback>
-         ),
-        }),
-    }
+   // static navigationOptions = {
+   //      header:(navigation, defaultHeader)=>({
+   //   //     visible:false,
+   //        title:'Flagchat',
+   //        style:{
+   //           height:48,
+   //           backgroundColor:'#6495ED',
+   //        },
+   //        tintColor:'white',
+   //        right:(
+   //         <TouchableNativeFeedback onPress={() => navigation.navigate('PostPage')}
+   //            background={TouchableNativeFeedback.SelectableBackground()}>
+   //          <View style={{marginRight:16,}} >
+   //            <Icon size={24} name='telegram' style={{color:'white',}}/>
+   //          </View>
+   //        </TouchableNativeFeedback>
+   //       ),
+   //      }),
+   //  }
 
    constructor(props){
       super(props)
@@ -92,8 +94,10 @@ class FlagListScreen extends Component {
   
   render(){
        //const { navigate } = this.props.navigation;
+       const { navigation } = this.props;
 		return(
          <View style={{flex:1}}>
+              <Header navigation={navigation}/>
               <PullToRefreshListView
                 ref={ (component) => this._pullToRefreshListView = component }
                 viewType={PullToRefreshListView.constants.viewType.listView}
@@ -115,7 +119,6 @@ class FlagListScreen extends Component {
                 pullDownStayDistance={50}
                 removeClippedSubviews={false}
                />
-            
          </View>         
 		);
 	}
