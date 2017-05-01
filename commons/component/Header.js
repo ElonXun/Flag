@@ -2,8 +2,8 @@
 
 import React, { Component } from 'react';
 import {
-	    View,
-	    Platform,
+	      View,
+	      Platform,
         Text, 
         StyleSheet, 
         Dimensions,

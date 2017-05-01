@@ -15,8 +15,8 @@ import {
         } from 'react-native';
 
 import ReplyNavigator from './ReplyNavigator'; 
-import FlagNavigator from './FlagNavigator'; 
 import Flag from './Flag';
+import MyScreen from './MyScreen';
 
 class BottomNavigator extends Component {
   static navigationOptions = {
@@ -89,7 +89,7 @@ class BottomNavigator extends Component {
                  renderIcon={() => <Icon containerStyle={{justifyContent: 'center', alignItems: 'center', marginTop: 8}} color={'#6F6F6F'} name='bell' size={24} />}
                  renderSelectedIcon={() => <Icon color={'#6296f9'} name='bell' size={26} />}
                  onPress={() => this.changeTab('reply')}>
-                 <ReplyNavigator />
+                 <ReplyNavigator screenProps={{navigation}}/>
                </Tab>
                <Tab
                   titleStyle={{fontWeight: 'bold', fontSize: 10, marginTop: -1 , marginBottom: 6}}
@@ -98,15 +98,8 @@ class BottomNavigator extends Component {
                   title={selectedTab === 'my' ? 'My' : 'My'}
                   renderIcon={() => <Icon containerStyle={{justifyContent: 'center', alignItems: 'center', marginTop: 8}} color={'#6F6F6F'} name='account' size={24} />}
                   renderSelectedIcon={() => <Icon color={'#6296f9'} name='account' size={26} />}
-                  onPress={() => 
-                    this.changeTab('my') 
-                   // this.props.navigation.navigate('PostScreen')
-                       // Alert.alert('111')
-                  } 
-                  >
-                  <Text>
-                      none
-                  </Text>
+                  onPress={() => this.changeTab('my') } >
+                  <MyScreen navigation={navigation} />
                 </Tab>
              </Tabs>
          </View>

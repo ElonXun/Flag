@@ -92,9 +92,16 @@ import { List, ListItem } from 'react-native-elements'
                 // titleContainerStyle={{ marginLeft:72}}
                 //rightIcon={{name:'chevron-right'}}
                 hideChevron={true}
-                onPress={() => {Alert.alert(`${replyList[1].title}`)}}
+                onPress={
+                    this._showCommentScreen
+                }
               />
         )
+    }
+
+    _showCommentScreen = () =>{
+         this.props.screenProps.navigation.navigate('CommentScreen')
+        // Alert.alert(`${this.props.screenProps}`)
     }
 
     _renderHeader = (viewState) => {

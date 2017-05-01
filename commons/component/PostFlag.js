@@ -13,13 +13,14 @@ import {
         StatusBar,
         Button,
         NativeAppEventEmitter,
+        TouchableOpacity,
 } from 'react-native';
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import AppEventListenerEnhance from 'react-native-smart-app-event-listener-enhance';
 import AMapLocation from 'react-native-smart-amap-location';
 import AMap from 'react-native-smart-amap';
- 
+
 
 const {width: deviceWidth, height: deviceHeight} = Dimensions.get('window')
 
@@ -79,30 +80,12 @@ class PostFlag extends Component{
               </Text>
               <View style={styles.location}>
                  <Icon name={'map-marker'} size={20} style={{marginRight:6,}} />
-                 <Text >{this.state.AMapLoctionAddress}</Text>
+                   <TouchableOpacity onPress={this._showAMap}>
+                      <Text >{this.state.AMapLoctionAddress}</Text>
+                   </TouchableOpacity>
               </View>
            </View>
-             <AMap
-                 ref={ component => this._amap = component }
-                 style={{flex: 1, }}
-                 options={{
-                     frame: {
-                         width: deviceWidth,
-                        // height: (deviceHeight - 260)
-                     },
-                     showsUserLocation: true,
-                     userTrackingMode: Platform.OS == 'ios' ? AMap.constants.userTrackingMode.none : null,
-                     // centerCoordinate: {
-                     //     latitude: this._coordinate.latitude,
-                     //     longitude: this._coordinate.longitude,
-                     // },
-                     zoomLevel: 18.1,
-                     centerMarker: Platform.OS == 'ios' ? 'icon_location' : 'poi_marker',
-
-                 }}
-                 onLayout={this._onLayout}
-                 //visible={'false'}
-                 />          
+                   
         </View>
       );
    }
@@ -122,17 +105,20 @@ class PostFlag extends Component{
               latitude: result.coordinate.latitude,
               longitude: result.coordinate.longitude,
             }
-            this._amap.setOptions({
-                zoomLevel: 18.1,
-            })
-            this._amap.setCenterCoordinate(this._coordinate)
+            // this._amap.setOptions({
+            //     zoomLevel: 18.1,
+            // })
+            // this._amap.setCenterCoordinate(this._coordinate)
             //Alert.alert(`格式化地址 = ${result.POIName}`)
             //Alert.alert(`格式化地址 = ${result.formattedAddress}`)
             //Alert.alert(`纬度 = ${result.coordinate.latitude}, 经度 = ${result.coordinate.longitude}`)
         }
 
     }
-
+    
+    _showAMap = () => {
+        this.props.navigation.navigate('MapScreen',{coordinate:this._coordinate})
+    }
     // _onShowMap=()=>{
     //   Alert.alert('aaa');
     // }

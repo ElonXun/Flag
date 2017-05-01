@@ -2,10 +2,11 @@
 
 import { Platform } from 'react-native';
 import { StackNavigator } from 'react-navigation';
-import Flag from './Flag';
-import PostScreen from './PostScreen';
 import BottomNavigator from './BottomNavigator';
 import PostFlag from './PostFlag';
+import AMapScreen from './AMapScreen';
+import CommentScreen from './CommentScreen';
+
 
 const MainRouters = {
     BottomNavigator: {
@@ -16,10 +17,15 @@ const MainRouters = {
         name: 'PostFlag',
         screen: PostFlag,
     },
-    // CommentScreen: {
-    // 	name: 'CommentScreen',
-    // 	screen: CommentScreen,
-    // },
+    CommentScreen: {
+    	name: 'CommentScreen',
+    	screen: CommentScreen,
+    },
+    MapScreen: {
+        name: 'MapScreen',
+        screen: AMapScreen,
+    },
+
 
 };
 
