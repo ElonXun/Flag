@@ -8,6 +8,7 @@ import { ThemeProvider } from 'react-native-material-ui';
 import TabBarNavigator from './commons/component/TabBarNavigator';
 import BottomNavigator from './commons/component/BottomNavigator';
 import MainNavigator from './commons/component/MainNavigator';
+import SignUp from './app/account/SignUp';
 
 export default class App extends Component {
   render() {
