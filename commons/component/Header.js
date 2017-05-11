@@ -19,8 +19,8 @@ const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : 0;
 const TITLE_OFFSET = Platform.OS === 'ios' ? 70 : 40;
 
 class Header extends Component {
-   constructor() {
-     super()
+   constructor(props) {
+     super(props)
    }
 
     render(){
@@ -30,16 +30,26 @@ class Header extends Component {
                   <View style={styles.item}>
                       <Text style={styles.title}>Flagchat</Text>
                   </View>
-                  <View style={styles.right}>
+                  {this._rightIcon()}
+              </View>
+           </View>
+		);
+	}
+
+  _rightIcon() {
+    if(!this.props.hiddenRightIcon){
+       return(
+           <View style={styles.right}>
                       <TouchableNativeFeedback onPress={() => this.props.navigation.navigate('PostScreen')}
                         background={TouchableNativeFeedback.SelectableBackground()}>
                          <Icon size={24} name='telegram' style={{color:'white',}}/>
                       </TouchableNativeFeedback>
                   </View>
-              </View>
-           </View>
-		);
-	}
+       );
+    }else{
+      return null;
+    }
+  }
 }  
 
 const styles=StyleSheet.create({
@@ -78,6 +88,7 @@ const styles=StyleSheet.create({
         bottom: 13,
         //top: 0,
         position: 'absolute',
+
     },
     
 

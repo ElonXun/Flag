@@ -8,7 +8,7 @@ import { ThemeProvider } from 'react-native-material-ui';
 import TabBarNavigator from './commons/component/TabBarNavigator';
 import BottomNavigator from './commons/component/BottomNavigator';
 import MainNavigator from './commons/component/MainNavigator';
-import SignUp from './app/account/SignUp';
+import VerifyCode from './app/account/VerifyCode';
 
 export default class App extends Component {
   render() {
@@ -26,7 +26,7 @@ export default class App extends Component {
               <StatusBar 
                    backgroundColor = '#4169E1' 
                    opacity = '0.5'/>
-              <MainNavigator />
+              <VerifyCode />
            </View>
         </ThemeProvider>
     );
