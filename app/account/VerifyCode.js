@@ -2,8 +2,8 @@
 
 import React, { Component } from 'react';
 import {
-	    View,
-	    Platform,
+	      View,
+	      Platform,
         Text, 
         StyleSheet, 
         Dimensions,
@@ -20,8 +20,18 @@ import request from '../../commons/request';
 import config from '../../commons/config';
 
 import Header from '../../commons/component/Header';
+var {CountDownText} = require('react-native-sk-countdown');
 
 class VerifyCode extends Component {
+
+   constructor(props){
+      super(props)
+      this.state=({
+         toSendCodeAgain: false,
+      })
+   }
+   
+
    render(){
    	  return(
          <View style={styles.container}>
@@ -44,9 +54,27 @@ class VerifyCode extends Component {
                    />
              </View>
              <View style={styles.sendAgain}>
-                 <Text>60秒后可以重新获取验证码</Text>
+                {
+                  this.state.toSendCodeAgain ?  
+                  <TouchableNativeFeedback  
+                     background={TouchableNativeFeedback.SelectableBackground()}
+                     onPress={()=>{ Alert.alert('重新发送验证码')}}>
+                     <Text  style={styles.countdown} >重新发送验证码</Text>
+                  </TouchableNativeFeedback>
+                  :
+                  <CountDownText
+                       style={styles.countdown}
+                       countType='seconds' // 计时类型：seconds / date
+                       auto={true} // 自动开始
+                       afterEnd={()=>{ this.setState({toSendCodeAgain: true ,})}} // 结束回调
+                       timeLeft={10} // 正向计时 时间起点为0秒
+                       step={-1} // 计时步长，以秒为单位，正数则为正计时，负数为倒计时
+                       //startText='获取验证码' // 开始的文本
+                       // endText='重新发送验证码' // 结束的文本
+                       intervalText={(sec) => sec + '秒后可以重新获取验证码'} // 定时的文本回调
+                     />
+                }
              </View>
-
              <View style={styles.nextButton}> 
                  <Button title='确定'
                      backgroundColor={'#6495ED'} 
@@ -65,7 +93,10 @@ class VerifyCode extends Component {
           .then((response)=>{
             console.log(response)
           })
-
+   }
+   
+   _reSetCode(){
+       Alert.alert('发送验证码')
    }
 }
 
@@ -95,7 +126,10 @@ const styles = StyleSheet.create({
        marginTop: 16,
        alignItems: 'center',
    },
-
+  
+   countdown: {
+       color: '#576B95',
+   },
 });
 
 export default VerifyCode;
