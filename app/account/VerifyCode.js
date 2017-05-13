@@ -10,10 +10,10 @@ import {
         Alert,
         TouchableNativeFeedback,
         ScrollView,  
+        TextInput,
         } from 'react-native';
 
 
-import TextField from 'react-native-md-textinput';
 import { Button } from 'react-native-elements';
 
 import request from '../../commons/request';
@@ -23,6 +23,27 @@ import Header from '../../commons/component/Header';
 var {CountDownText} = require('react-native-sk-countdown');
 
 class VerifyCode extends Component {
+
+  static navigationOptions = {
+        header:(navigation, defaultHeader)=>({
+     //     visible:false,
+          title:'填写验证码',
+          style:{
+             height:48,
+             backgroundColor:'#6495ED',
+          },
+          tintColor:'white',
+         //  right:(
+         //   <TouchableNativeFeedback onPress={() => navigation.navigate('PostPage')}
+         //      background={TouchableNativeFeedback.SelectableBackground()}>
+         //    <View style={{marginRight:16,}} >
+         //      <Icon size={24} name='telegram' style={{color:'white',}}/>
+         //    </View>
+         //  </TouchableNativeFeedback>
+         // ),
+        }),
+    }
+
 
    constructor(props){
       super(props)
@@ -36,22 +57,24 @@ class VerifyCode extends Component {
    	  return(
          <View style={styles.container}>
            <ScrollView>
-             <Header hiddenRightIcon={true}/>
              <View style={styles.title}>
                 <Text style={{ color: 'black', fontSize: 28 ,fontWeight: '400'}}>17826806030</Text>
              </View>
              <View style={styles.formWapper}>
-                 <TextField
-                     //label={''}
+                <TextInput 
+                     underlineColorAndroid={'#A9A9A9'}
                      placeholder={'请输入6位验证码'}
-                     placeholderTextColor={'#E0E0E0'}
+                     placeholderTextColor={'#A9A9A9'}
                      autoCapitalize={'none'}
                      autoCorrect={false}
-                     highlightColor={'#6495ED'}
+                     //highlightColor={'#6495ED'}
                      keyboardType={'numeric'}
-                     height={46}
-                    // onChangeText={(text)=>{ Alert.alert(text)}}
-                   />
+                     //disableFullscreenUI={true}
+                     style={{fontSize: 16,}}
+                     //height={46}
+                     onChangeText={(text)=>{ this.setState({ phoneNumber: text})}}
+                     secureTextEntry={true}
+                     />
              </View>
              <View style={styles.sendAgain}>
                 {
@@ -87,8 +110,10 @@ class VerifyCode extends Component {
    	  );
    }
 
-   _text(){
-      Alert.alert('xs')
+   _text =() =>{
+      //到设置密码页面
+      this.props.navigation.navigate('SetPasswordPage')
+     // Alert.alert('xs')
       request.get('http://rapapi.org/mockjs/15841/api/flags?accessToken=123')
           .then((response)=>{
             console.log(response)

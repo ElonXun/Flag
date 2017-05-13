@@ -19,7 +19,7 @@ request.get = function (url,params) {
 }
 
 request.post =function(url,body) {
-	var option = _.extend(config.header,{
+	var options = _.extend(config.header,{
 		body: JSON.stringify(body)
 	})
 

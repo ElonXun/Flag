@@ -8,8 +8,9 @@ module.exports = {
           'Content-Type': 'application/json',
         }
 	},
+	
 	api: {
 		base: '',
-		creations: '',
+		creations: 'verifyPhoneAndPssword',
 	}
 }

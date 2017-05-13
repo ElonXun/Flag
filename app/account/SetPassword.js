@@ -21,11 +21,11 @@ const {width} = Dimensions.get('window');
 
 
 
-class SignUp extends Component {
+class SetPassword extends Component {
   static navigationOptions = {
         header:(navigation, defaultHeader)=>({
      //     visible:false,
-          title:'填写手机号',
+          title:'设置密码',
           style:{
              height:48,
              backgroundColor:'#6495ED',
@@ -44,7 +44,7 @@ class SignUp extends Component {
 
 	constructor() {
       super()
-      this.state = { phoneNumber: ''}
+      // this.state = { phoneNumber: ''}
     }
     
     render(){
@@ -56,37 +56,43 @@ class SignUp extends Component {
              <View style={styles.formWapper}>
                 <TextInput 
                      underlineColorAndroid={'#A9A9A9'}
-                     placeholder={'您的手机号码'}
+                     placeholder={'请填写您的密码'}
                      placeholderTextColor={'#A9A9A9'}
                      autoCapitalize={'none'}
                      autoCorrect={false}
                      //highlightColor={'#6495ED'}
-                     keyboardType={'numeric'}
+                     keyboardType={'default'}
                      //disableFullscreenUI={true}
                      style={{fontSize: 16,}}
                      //height={46}
                      onChangeText={(text)=>{ this.setState({ phoneNumber: text})}}
-                     // secureTextEntry={true}
+                     secureTextEntry={true}
+                     />
+                  <TextInput 
+                     underlineColorAndroid={'#A9A9A9'}
+                     placeholder={'请重复您的密码'}
+                     placeholderTextColor={'#A9A9A9'}
+                     autoCapitalize={'none'}
+                     autoCorrect={false}
+                     //highlightColor={'#6495ED'}
+                     keyboardType={'default'}
+                     //disableFullscreenUI={true}
+                     style={{fontSize: 16,}}
+                     //height={46}
+                     onChangeText={(text)=>{ this.setState({ phoneNumber: text})}}
+                     secureTextEntry={true}
                      />
              </View>
              <View style={styles.nextButton}> 
-                 <Button title='下一步'
+                 <Button title='确定'
                      backgroundColor={'#6495ED'} 
                      borderRadius={3}
                      onPress={()=>{
                          //验证手机号是否已注册，及是否符合注册要求
-                         this.props.navigation.navigate('VerifyCodePage');
+                         //this.props.navigation.navigate('VerifyCodePage');
+                         Alert.alert('确定')
                      }}
                      /> 
-             </View>
-             <View style={styles.toLogin}>
-                <TouchableNativeFeedback  
-                     background={TouchableNativeFeedback.SelectableBackground()}
-                     onPress={()=>{
-                        goBack()
-                     }}>
-                  <Text style={{color: '#576B95', textAlign: 'center',}}>直接登录</Text>
-                 </TouchableNativeFeedback>
              </View>
            </ScrollView>
         </View>
@@ -125,4 +131,4 @@ const styles= StyleSheet.create({
    },
 });
 
-export default SignUp;
+export default SetPassword;
