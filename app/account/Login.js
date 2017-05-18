@@ -2,8 +2,8 @@
 
 import React, { Component } from 'react';
 import {
-	    View,
-	    Platform,
+	      View,
+	      Platform,
         Text, 
         StyleSheet, 
         Dimensions,
@@ -113,7 +113,8 @@ class Login extends Component {
          </View>
    	  );
    }
-
+   
+  
    _verifyPhoneAndPassword =() =>{
        var that = this 
        //验证账号密码
@@ -121,14 +122,27 @@ class Login extends Component {
           phoneNumber: this.state.phoneNumber,
           password: this.state.password,
        }
+       //判断账号密码合法性
+       var pattPhoneNumber = new RegExp('^1[3|4|5|7|8][0-9]{9}$').test(this.state.phoneNumber)
+       var pattPassword = new RegExp('^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,16}$').test(this.state.password)
+       var verifyURL = config.api.base + config.api.verifyLogin
+      // Alert.alert('账号'+pattPhoneNumber)
+      // Alert.alert('密码'+pattPassword)
+       if(!pattPhoneNumber){
+         Alert.alert('请输入合法的手机号')
+         return 
+       }
 
-       var verifyURL = config.api.base + config.api.verify
+       if(!pattPassword){
+         Alert.alert('密码错误')
+         return 
+       }
 
-       request.post('http://rapapi.org/mockjs/15841/api/u/verify?', body)
+       request.post(verifyURL, body)
          .then((data) => {
             if(data && data.success) {
               that.props.screenProps.afterLogin(data.data)
-              Alert.alert('成功')
+              Alert.alert('登录成功')
             }else{
               Alert.alert('获取验证码失败，请检查手机号是否正确')
             }
@@ -137,9 +151,8 @@ class Login extends Component {
              Alert.alert('获取验证码失败，请检查网络是否良好')
              console.error(err)           
          })
-       //成功后跳转到主界面
         
-       Alert.alert('登录操作')
+       Alert.alert('登录操作'+pattPhoneNumber)
    }
 
    _toFindMyPassword=()=>{

@@ -44,7 +44,10 @@ class SetPassword extends Component {
 
 	constructor() {
       super()
-      // this.state = { phoneNumber: ''}
+      this.state = ({ 
+         password: '',
+         passwordAgain: '',
+      })
     }
     
     render(){
@@ -65,7 +68,7 @@ class SetPassword extends Component {
                      //disableFullscreenUI={true}
                      style={{fontSize: 16,}}
                      //height={46}
-                     onChangeText={(text)=>{ this.setState({ phoneNumber: text})}}
+                     onChangeText={(text)=>{ this.setState({ password: text})}}
                      secureTextEntry={true}
                      />
                   <TextInput 
@@ -79,7 +82,7 @@ class SetPassword extends Component {
                      //disableFullscreenUI={true}
                      style={{fontSize: 16,}}
                      //height={46}
-                     onChangeText={(text)=>{ this.setState({ phoneNumber: text})}}
+                     onChangeText={(text)=>{ this.setState({ passwordAgain: text})}}
                      secureTextEntry={true}
                      />
              </View>
@@ -87,11 +90,7 @@ class SetPassword extends Component {
                  <Button title='确定'
                      backgroundColor={'#6495ED'} 
                      borderRadius={3}
-                     onPress={()=>{
-                         //验证手机号是否已注册，及是否符合注册要求
-                         //this.props.navigation.navigate('VerifyCodePage');
-                         Alert.alert('确定')
-                     }}
+                     onPress={this._toSetPassword}
                      /> 
              </View>
            </ScrollView>
@@ -99,7 +98,28 @@ class SetPassword extends Component {
     	);
     }
    
-   
+   _toSetPassword = () =>{
+       var phoneNumber = this.props.navigation.state.params.phoneNumber
+       var pattPassword = new RegExp('^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,16}$').test(this.state.password)
+       var pattPasswordAgain = new RegExp('^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,16}$').test(this.state.passwordAgain)
+       var data = {
+         phoneNumber: phoneNumber,
+         password: passwordAgain, 
+       }  
+       Alert.alert("phoneNumber"+phoneNumber+pattPassword+'第二次'+pattPasswordAgain)
+       //验证密码的合法性和两次输入是否相同
+       if(!pattPassword || !pattPasswordAgain) {
+          Alert.alert('密码长度在6-16之间,必须同时包含数字和英文字母,且不能包含其他符合')
+          return 
+       }
+
+       if(this.state.password !== this.state.passwordAgain) {
+          Alert.alert('两次密码输入不同,请再次输入')
+          return
+       }
+       //异步设置密码
+       Alert.alert('确定')
+   }
 
 
 }

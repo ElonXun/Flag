@@ -42,7 +42,7 @@ class SignUp extends Component {
         }),
     }
 
-	constructor() {
+	 constructor() {
       super()
       this.state = { phoneNumber: ''}
     }
@@ -73,10 +73,7 @@ class SignUp extends Component {
                  <Button title='下一步'
                      backgroundColor={'#6495ED'} 
                      borderRadius={3}
-                     onPress={()=>{
-                         //验证手机号是否已注册，及是否符合注册要求
-                         this.props.navigation.navigate('VerifyCodePage');
-                     }}
+                     onPress={this._toVerifyCode}
                      /> 
              </View>
              <View style={styles.toLogin}>
@@ -92,7 +89,23 @@ class SignUp extends Component {
         </View>
     	);
     }
-   
+  
+  _toVerifyCode = () =>{
+       var that = this 
+       //验证账号密码
+       var body = {
+          phoneNumber: this.state.phoneNumber,
+       }
+       //验证手机号是否填写以及合法性
+       var pattPhoneNumber = new RegExp('^1[3|4|5|7|8][0-9]{9}$').test(this.state.phoneNumber)
+       if(!pattPhoneNumber) {
+          Alert.alert('请输入合法的手机号')
+          return 
+       }
+
+       //验证手机号是否已注册，及是否符合注册要求
+       this.props.navigation.navigate('VerifyCodePage', { phoneNumber: this.state.phoneNumber});
+  }
    
 
 

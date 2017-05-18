@@ -48,7 +48,9 @@ class VerifyCode extends Component {
    constructor(props){
       super(props)
       this.state=({
+        // phoneNumber: this.props.navigation.state.params.phoneNumber,
          toSendCodeAgain: false,
+         verifyCode: '',
       })
    }
    
@@ -58,7 +60,7 @@ class VerifyCode extends Component {
          <View style={styles.container}>
            <ScrollView>
              <View style={styles.title}>
-                <Text style={{ color: 'black', fontSize: 28 ,fontWeight: '400'}}>17826806030</Text>
+                <Text style={{ color: 'black', fontSize: 28 ,fontWeight: '400'}}>{this.props.navigation.state.params.phoneNumber}</Text>
              </View>
              <View style={styles.formWapper}>
                 <TextInput 
@@ -72,8 +74,8 @@ class VerifyCode extends Component {
                      //disableFullscreenUI={true}
                      style={{fontSize: 16,}}
                      //height={46}
-                     onChangeText={(text)=>{ this.setState({ phoneNumber: text})}}
-                     secureTextEntry={true}
+                     onChangeText={(text)=>{ this.setState({ verifyCode: text})}}
+                     //secureTextEntry={true}
                      />
              </View>
              <View style={styles.sendAgain}>
@@ -111,13 +113,26 @@ class VerifyCode extends Component {
    }
 
    _text =() =>{
+      var phoneNumber = this.props.navigation.state.params.phoneNumber
+      var pattVerifyCode = new RegExp('^[0-9]{6}$').test(this.state.verifyCode) 
+      var data = {
+        phoneNumber: phoneNumber,
+        verifyCode: this.state.verifyCode,
+      }
+      // 判断验证码的合法性
+     // Alert.alert('phoneNumber'+phoneNumber + pattVerifyCode+this.state.verifyCode)
+      if(!pattVerifyCode) {
+         Alert.alert('请输入6位纯数字验证码')
+         return
+      }
+      // 异步验证验证码
+
+      // request.get('http://rapapi.org/mockjs/15841/api/flags?accessToken=123')
+      //     .then((response)=>{
+      //       console.log(response)
+      //     })
       //到设置密码页面
-      this.props.navigation.navigate('SetPasswordPage')
-     // Alert.alert('xs')
-      request.get('http://rapapi.org/mockjs/15841/api/flags?accessToken=123')
-          .then((response)=>{
-            console.log(response)
-          })
+      this.props.navigation.navigate('SetPasswordPage', {phoneNumber: phoneNumber})
    }
    
    _reSetCode(){

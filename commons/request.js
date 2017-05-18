@@ -25,7 +25,7 @@ request.post =function(url,body) {
 
 	return fetch(url, options)
 	   .then((response)=> response.json())
-       .then((response)=> Mock.mock(response))
+      // .then((response)=> Mock.mock(response))
 }
 
 
