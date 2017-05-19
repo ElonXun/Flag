@@ -23,7 +23,7 @@ class Header extends Component {
      super(props)
    }
 
-    render(){
+  render(){
 		return(
            <View style={styles.container}>
               <View style={styles.header}>
@@ -41,8 +41,12 @@ class Header extends Component {
        return(
            <View style={styles.right}>
                       <TouchableNativeFeedback onPress={() => this.props.navigation.navigate('PostScreen')}
-                        background={TouchableNativeFeedback.SelectableBackground()}>
-                         <Icon size={24} name='telegram' style={{color:'white',}}/>
+                        background={TouchableNativeFeedback.Ripple('rgba(0, 0, 0, .32)',true)}>
+                          <View style={styles.rightContainer}>
+                             <View style={styles.rightWapper}>
+                                <Icon size={24} name='telegram' style={{color:'white',}}/>
+                             </View>
+                          </View>
                       </TouchableNativeFeedback>
                   </View>
        );
@@ -80,16 +84,26 @@ const styles=StyleSheet.create({
     },
     item:{
     	position: 'absolute',
-    	bottom: 14,
+    	bottom: 12,
     	//top: 0,
     },
     right: {
-    	  right: 16,
-        bottom: 13,
+    	  right: 0,
+        bottom: 0,
         //top: 0,
         position: 'absolute',
 
     },
+    rightContainer: {
+        width: 56,
+        height: 48,
+    },
+    rightWapper: {
+      paddingLeft: 16,
+      paddingRight: 16,
+      paddingTop: 12,
+      paddingBottom: 12,
+    }, 
     
 
 });

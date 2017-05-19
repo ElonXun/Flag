@@ -40,7 +40,7 @@ class MyScreen extends Component {
                     //subtitle={'一个流氓的清教徒'}
                     //subtitleStyle={{fontWeight:'normal'}}
                     //subtitleContainerStyle={{marginLeft: 16}}
-                    onPress={()=>{ Alert.alert('编辑个人信息')}}
+                    onPress={this._toProfileScreen}
                   />
                </View>
                <View style={styles.wapper}>
@@ -79,6 +79,11 @@ class MyScreen extends Component {
         </ScrollView>
     	);
     }
+  
+  _toProfileScreen = () => {
+     this.props.navigation.navigate('ProfileScreen')
+  }
+
 }
 const styles = StyleSheet.create({
     container: {

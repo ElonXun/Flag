@@ -6,7 +6,7 @@ import BottomNavigator from './BottomNavigator';
 import PostFlag from './PostFlag';
 import AMapScreen from './AMapScreen';
 import CommentScreen from './CommentScreen';
-
+import ProfileScreen from '../../app/screen/ProfileScreen';
 
 const MainRouters = {
     BottomNavigator: {
@@ -25,7 +25,10 @@ const MainRouters = {
         name: 'MapScreen',
         screen: AMapScreen,
     },
-
+    ProfileScreen: {
+        name: 'ProfileScreen',
+        screen: ProfileScreen,
+    }
 
 };
 
