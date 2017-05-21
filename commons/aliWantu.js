@@ -2,9 +2,8 @@
 
 import queryString from 'query-string';
 import _ from 'lodash';
-import RNFS from 'react-native-fs';
-
-let config = {
+var aliWantu = {}
+var config = {
    headr: {
       method: 'POST',
       headers: {
@@ -13,7 +12,7 @@ let config = {
          //'Accept-Encoding': 'gzip,deflate',
          //'Connection': 'Keep-Alive',
          'User-Agent': 'ALIMEDIASDK_NODEJS_CLOUD',
-      	 'Authorization': '',
+      	 'Authorization': 'MjM4MjAyNjk6ZXlKcGJuTmxjblJQYm14NUlqb2lNQ0lzSW01aGJXVnpjR0ZqWlNJNkltWnNZV2RqYUdGMElpd2laWGh3YVhKaGRHbHZiaUk2SWkweEluMDo5NTZlZWNjNDI0ZGEwZWUwMDA0MzQ4MDczNjI3MzdjMTAwODU1N2I1',
       }
    },
 
@@ -23,42 +22,48 @@ let config = {
    },
    
 }
+//'{"dir": ${dir},"name": ${name},"size": ${filesize},"w": ${width},"h": ${height}}'
 
-
-config.headr.heades['Authorization'] = 'UPLOAD_AK_TOP MjM4MjAyNjk6SW50Y0ltNWhiV1Z6Y0dGalpWd2lPbHdpWm14aFoyTm9ZWFJjSWl4Y0ltVjRjR2x5WVhScGIyNWNJanBjSWpFME9UVTVOell5TnpnM016QmNJaXhjSW5KbGRIVnlia0p2WkhsY0lqcGNJbnRjSW1ScGNsd2lPaVI3WkdseWZTeGNJbTVoYldWY0lqb2tlMjVoYldWOUxGd2ljMmw2WlZ3aU9pUjdabWxzWlhOcGVtVjlMRndpZDF3aU9pUjdkMmxrZEdoOUxGd2lhRndpT2lSN2FHVnBaMmgwZlNCOVhDSjlJZzpkZWU5ODE5NzFhZWRhMWI5OTY3ZWQyYjYyNWFlZjMyOTY2M2IzYTM3'
+// config.headr.heades['Authorization'] = 
 
 
 
 
 
 //单个文件上传
-aliWantu.singleUpload = function() {
-    var fileSize = fs.statSync(filePath).size
-	var fileName = filePath.split('/').pop()
-	// if (fileSize > MAXSIZE) {
-	//     throw new Error("file is too large, use multi part upload please")
-	//     return
-	//  }
+aliWantu.singleUpload = function(filePath,size) {
+    console.log('0'+filePath)
+    var fileSize = size
+	//var fileName = filePath.split('/').pop()
+    var dir = '/profile/avatar'
+    var fileName =  'id'+'-'+ Date.now() + '.' + filePath.split('/').pop().split('.').pop()
 
-	let formData = new FormData()
+    console.log(fileSize)
+
+	var formData = new FormData()
 	// formData.append('md5', md5)
 	formData.append('size', fileSize)
 	formData.append('dir', dir)
-	formData.append('name', name)
-	formData.append('content', {uri: filePath,type: 'application/octet-stream', name: 'image.jpg'})
+	formData.append('name', fileName)
+	formData.append('content', {uri: filePath,type: 'application/octet-stream', name: fileName})
 
 
-	var options = _.extend(config.header,{
-		body: JSON.stringify(formData)
-	})
-    
-
-
-
+	// var options = _.extend(config.header,{
+	// 	body: JSON.stringify(formData)
+	// })
+	var options = {}
+	options.headers = {
+	   'Content-Type': 'multipart/form-data; boundary=zcV4qZ1R8f7jaG7hzVlZ_RL9oOdIZWv9tUCoKq',
+         //'Accept-Encoding': 'gzip,deflate',
+         //'Connection': 'Keep-Alive',
+         'User-Agent': 'ALIMEDIASDK_NODEJS_CLOUD',
+      	 'Authorization': 'UPLOAD_AK_TOP MjM4MjAyNjk6ZXlKdVlXMWxjM0JoWTJVaU9pSm1iR0ZuWTJoaGRDSXNJbVY0Y0dseVlYUnBiMjRpT2pFME9UVTVPRGczT1RnNU16RXNJbWx1YzJWeWRFOXViSGtpT2pCOTpjZmUyOTYwMDZkNWQ3YmU5MzNkY2M2Njk4Y2ZiNzJmZmU1ZDI2ODMz',	 
+	}
+    options.body = formData;
+    options.method = 'post';
 	var uri = config.api.base + config.api.singleUpload 
 
-	return fetch(uri, options)
-	   .then((response)=> response.json())
+	return fetch(uri,options).then((response)=> response.json())
       // .then((response)=> Mock.mock(response))
 }
 

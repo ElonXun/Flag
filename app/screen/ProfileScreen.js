@@ -18,6 +18,8 @@ import {
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Button } from 'react-native-elements';
 import ImagePicker from 'react-native-image-crop-picker';
+import aliWantu from '../../commons/aliWantu';
+
 
 const APPBAR_HEIGHT = Platform.OS === 'ios' ? 44 : 48;
 const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : 0;
@@ -170,12 +172,14 @@ class ProfileScreen extends Component {
                user: user,
             })
             //上传文件
-            that._uploadAvatar(res.path)
+            that._uploadAvatar(res.path,res.size)
       }).catch(e => alert(e))
    }
 
-   _uploadAvatar = (path)=>{
-      Alert.alert(path)
+   _uploadAvatar = (path,size)=>{
+      aliWantu.singleUpload(path,size).then((res)=>{
+         console.log(res)
+      })
    }
 }
 
