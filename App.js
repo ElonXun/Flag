@@ -79,7 +79,7 @@ export default class App extends Component {
                    backgroundColor = '#4169E1' 
                    opacity = '0.5'/>
               {
-                this.state.logined ? 
+                !this.state.logined ? 
                  <MainNavigator />
                 : <AccountNavigator screenProps={{afterLogin: (user)=> this._afterLogin(user)}}/>              
               }

@@ -11,7 +11,9 @@ import {
         TouchableNativeFeedback,
         ScrollView,
         Image,
-        TouchableWithoutFeedback,  
+        TouchableWithoutFeedback,
+        TextInput,
+        AsyncStorage,  
         } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Button } from 'react-native-elements';
@@ -33,6 +35,22 @@ class ProfileScreen extends Component {
       super(props)
       this.state = { profileAction: '编辑',user: {avatar: 'http://flystation.image.alimmdn.com/blog/blogBackground/timg.jpg?t=1484112779149'}}
     }
+  
+  componentDidMount(){
+     // var that = this
+     // var user
+     // AsyncStorage.getItem('user').then((data)=>{
+     //    if(data){
+     //      user = JSON.parse(data)
+     //    }
+
+     //    if(user && user.accessToken){
+     //      that.setState({
+     //         user: user,
+     //      })
+     //    }
+     // })
+  }
 
 	render(){
     const {goBack} = this.props.navigation;
@@ -82,6 +100,44 @@ class ProfileScreen extends Component {
                       </View>
                      </TouchableWithoutFeedback>
                  </View>
+                 <View style={styles.inputProfile}>
+                      <TextInput 
+                         underlineColorAndroid={'#A9A9A9'}
+                         placeholder={'昵称'}
+                         placeholderTextColor={'#A9A9A9'}
+                         autoCapitalize={'none'}
+                         autoCorrect={false}
+                         defaultValue={'风马牛'}
+                         //highlightColor={'#6495ED'}
+                         keyboardType={'default'}
+                         //disableFullscreenUI={true}
+                         style={{fontSize: 16,}}
+                         //inlineImageLeft='http://flystation.image.alimmdn.com/blog/blogBackground/timg.jpg?t=1484112779149'
+                         inlineImagePadding={30}
+                         //height={46}
+                        // onChangeText={(text)=>{ this.setState({ phoneNumber: text})}}
+                         // secureTextEntry={true}
+                       />
+                 </View>
+                  <View style={styles.inputProfile}>
+                      <TextInput 
+                         underlineColorAndroid={'#A9A9A9'}
+                         placeholder={'个性签名'}
+                         placeholderTextColor={'#A9A9A9'}
+                         autoCapitalize={'none'}
+                         autoCorrect={false}
+                         defaultValue={'Less callback,more girls'}
+                         //highlightColor={'#6495ED'}
+                         keyboardType={'default'}
+                         //disableFullscreenUI={true}
+                         style={{fontSize: 16,}}
+                         //inlineImageLeft='http://flystation.image.alimmdn.com/blog/blogBackground/timg.jpg?t=1484112779149'
+                         inlineImagePadding={30}
+                         //height={46}
+                        // onChangeText={(text)=>{ this.setState({ phoneNumber: text})}}
+                         // secureTextEntry={true}
+                       />
+                 </View>
               </ScrollView>
            </View>
        </View>
@@ -96,11 +152,14 @@ class ProfileScreen extends Component {
      var that = this 
      var user = this.state.user
      ImagePicker.openPicker({
-        width: 300,
-        height: 300,
+        width: 250,
+        height: 250,
         cropping: true,
         includeBase64: true,
         compressImageQuality: 0.75,
+        cropperCircleOverlay:true,
+        showCropGuidelines:false,
+        hideBottomControls:true,
        }).then(res => {
             //console.log(res)
            // Alert.alert(image)
@@ -110,7 +169,13 @@ class ProfileScreen extends Component {
             that.setState({
                user: user,
             })
-      });
+            //上传文件
+            that._uploadAvatar(res.path)
+      }).catch(e => alert(e))
+   }
+
+   _uploadAvatar = (path)=>{
+      Alert.alert(path)
    }
 }
 
@@ -184,13 +249,15 @@ const styles=StyleSheet.create({
       paddingBottom: 12,
     }, 
     profileContainer: {
-      backgroundColor: 'yellow',
+      backgroundColor: 'white',
       flexDirection: 'row',
+      flex:1,
     },
     avatarContainer: {
       height: 130,
       alignItems: 'center',
       paddingTop: 16,
+     // backgroundColor: 'yellow',
     },
     avatarWapper:{
        marginBottom:8,
@@ -201,7 +268,11 @@ const styles=StyleSheet.create({
       borderRadius: 39,
       resizeMode: 'cover',
     },
-
+    inputProfile: {
+       //backgroundColor: 'pink',
+       paddingLeft: 16,
+       paddingRight: 16,
+    },
 
 });
 export default ProfileScreen;
