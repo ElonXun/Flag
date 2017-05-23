@@ -18,13 +18,14 @@ import {
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Button } from 'react-native-elements';
 import ImagePicker from 'react-native-image-crop-picker';
-import aliWantu from '../../commons/aliWantu';
+import {  Toast } from 'teaset';
+import * as Progress from 'react-native-progress';
 
+import aliWantu from '../../commons/aliWantu';
 
 const APPBAR_HEIGHT = Platform.OS === 'ios' ? 44 : 48;
 const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : 0;
 const TITLE_OFFSET = Platform.OS === 'ios' ? 70 : 40;
-
 
 class ProfileScreen extends Component {
    static navigationOptions = {
@@ -35,7 +36,14 @@ class ProfileScreen extends Component {
 
 	constructor(props){
       super(props)
-      this.state = { profileAction: '编辑',user: {avatar: 'http://flystation.image.alimmdn.com/blog/blogBackground/timg.jpg?t=1484112779149'}}
+      this.state = {
+          updateColor: '#AFEEEE',
+          isProfileUpdate: false, 
+          profileAction: '编辑',
+          user: {avatar: 'http://flystation.image.alimmdn.com/blog/blogBackground/timg.jpg?t=1484112779149'},
+          avatarProgress: 0,
+          isAvatarUploading: false,
+        }
     }
   
   componentDidMount(){
@@ -75,12 +83,12 @@ class ProfileScreen extends Component {
                       <Text style={styles.title}>个人信息</Text>
                   </View>
                    <View style={styles.right}>
-                      <TouchableNativeFeedback onPress={()=>{ Alert.alert('更新个人信息')}}
+                      <TouchableNativeFeedback onPress={ this.state.isProfileUpdate ? this._uploadProfile : null }
                         background={TouchableNativeFeedback.Ripple('rgba(0, 0, 0, .32)',true)
                        }>
                          <View style={styles.rightContainer}>
                              <View style={styles.rightWapper}>
-                                <Icon size={24} name='check' style={{color:'white',}}/>
+                                <Icon size={24} name='check' style={{color:this.state.updateColor,}}/>
                              </View>
                           </View>
                       </TouchableNativeFeedback>
@@ -93,9 +101,15 @@ class ProfileScreen extends Component {
                      <TouchableWithoutFeedback onPress={this._pickerImage}>
                       <View>
                         <View style={styles.avatarWapper}>
-                            <Image source={{uri:this.state.user.avatar}}
+                           <Image source={{uri:this.state.user.avatar}}
                                 style={styles.avatarImage}/>
                         </View>
+                        {this.state.isAvatarUploading? 
+                          <View style={styles.avatarProgress}>
+                             <Progress.Circle size={78} color={'#6495ED'} borderWidth={0} thickness={3} progress={this.state.avatarProgress}/>
+                          </View>
+                          : null
+                        }
                         <View>
                             <Text style={{textAlign:'center',color:'#576B95'}}>更换头像</Text>
                         </View>
@@ -114,10 +128,10 @@ class ProfileScreen extends Component {
                          keyboardType={'default'}
                          //disableFullscreenUI={true}
                          style={{fontSize: 16,}}
-                         //inlineImageLeft='http://flystation.image.alimmdn.com/blog/blogBackground/timg.jpg?t=1484112779149'
                          inlineImagePadding={30}
+                         onChange={this._setIsUpdateTrue}
                          //height={46}
-                        // onChangeText={(text)=>{ this.setState({ phoneNumber: text})}}
+                         onChangeText={(text)=>{ this.setState({ nickname: text})}}
                          // secureTextEntry={true}
                        />
                  </View>
@@ -128,15 +142,15 @@ class ProfileScreen extends Component {
                          placeholderTextColor={'#A9A9A9'}
                          autoCapitalize={'none'}
                          autoCorrect={false}
-                         defaultValue={'Less callback,more girls'}
+                         //defaultValue={'Less callback,more girls'}
                          //highlightColor={'#6495ED'}
                          keyboardType={'default'}
                          //disableFullscreenUI={true}
                          style={{fontSize: 16,}}
-                         //inlineImageLeft='http://flystation.image.alimmdn.com/blog/blogBackground/timg.jpg?t=1484112779149'
                          inlineImagePadding={30}
+                         onChange={this._setIsUpdateTrue}
                          //height={46}
-                        // onChangeText={(text)=>{ this.setState({ phoneNumber: text})}}
+                         onChangeText={(text)=>{ this.setState({ motto: text})}}
                          // secureTextEntry={true}
                        />
                  </View>
@@ -161,24 +175,123 @@ class ProfileScreen extends Component {
         compressImageQuality: 0.75,
         cropperCircleOverlay:true,
         showCropGuidelines:false,
-        hideBottomControls:true,
+        hideBottomControls:false,
        }).then(res => {
-            //console.log(res)
-           // Alert.alert(image)
-           // user.avatar = 'data:image/jpegbase64,'+ res.data
-            user.avatar = res.path
-            //console.log(user.avatar)
+           // user.avatar = res.path
             that.setState({
-               user: user,
+              // user: user,
+               newAvatarSize: res.size,
+               newAvatarPath: res.path,
             })
-            //上传文件
-            that._uploadAvatar(res.path,res.size)
+           // that._uploadAvatar(res.path,res.size)
+            var token = 'UPLOAD_AK_TOP MjM4MjAyNjk6ZXlKdVlXMWxjM0JoWTJVaU9pSm1iR0ZuWTJoaGRDSXNJbVY0Y0dseVlYUnBiMjRpT2pFME9UWXhNVEkwTWpNeE5qa3NJbWx1YzJWeWRFOXViSGtpT2pCOToyZWIxZGFhNTdkMjdmODcyOWI2MGU3YzZlNWQ3NGQzZjg5ZmI5NTEx' 
+            var dir = '/profile/avatar/' + 'id'
+            var fileName =  'id'+'-'+ Date.now() + '.' + res.path.split('.').pop()
+            // aliWantu.singleUpload(token,res.path,res.size,dir,fileName).then((res)=>{
+            //    console.log(res)
+            // })
+            var body = aliWantu.getBody(res.path,res.size,dir,fileName)
+            that._test(body,token)
+
       }).catch(e => alert(e))
    }
 
-   _uploadAvatar = (path,size)=>{
-      aliWantu.singleUpload(path,size).then((res)=>{
-         console.log(res)
+   _test = (body,token) =>{
+      var xhr = new XMLHttpRequest()
+      var url = 'http://upload.media.aliyun.com/api/proxy/upload'
+      var user = this.state.user
+      var that = this 
+
+      this.setState({
+        isAvatarUploading: true,
+        avatarProgress: 0,
+      })
+
+      xhr.open('POST',url)
+      xhr.onload = () => {
+         if(xhr.status !== 200){
+            Alert.alert('请求失败')
+            console.log(xhr.responseText)
+            return
+         }
+
+         if(!xhr.responseText){
+            Alert.alert('请求失败')
+            return
+         }
+
+         var response
+
+         try {
+            response = JSON.parse(xhr.response)
+         } catch(e) {
+           // statements
+           console.log(e);
+         }
+
+         if(response && response.url){
+            user.avatar = response.url
+            that.setState({
+              isAvatarUploading: false,
+              avatarProgress: 0,
+              user:user,
+            })
+            Toast.success('头像更新成功')
+            console.log(response)
+            console.log(response.url)
+         }
+      }
+      xhr.setRequestHeader('Content-Type','multipart/form-data; boundary=zcV4qZ1R8f7jaG7hzVlZ_RL9oOdIZWv9tUCoKq')
+      xhr.setRequestHeader('User-Agent','ALIMEDIASDK_NODEJS_CLOUD')
+      xhr.setRequestHeader('Authorization',token)
+      
+
+
+      if(xhr.upload){
+        xhr.upload.onprogress = (event)=> {
+          if(event.lengthComputable){
+             var percent = Number((event.loaded/event.total).toFixed(2))
+            // console.log(typeof(percent))
+             that.setState({
+                avatarProgress: percent,
+             })
+          }
+        }
+      }
+
+      xhr.send(body)
+
+
+   }
+
+   _uploadProfile = ()=>{
+      
+      var body = {
+         motto: this.state.motto,
+         nickname: this.state.nickname,
+      }
+
+      var pattNickname = new RegExp('^[\u4E00-\u9FA5A-Za-z0-9]+$').test(this.state.nickname)
+      //var pattMotto = new RegExp('').test(this.state.motto)
+
+      if(!pattNickname){
+        Alert.alert('昵称不能包含空格或其他特殊符号,请重新输入 ')
+      }
+
+
+      //判断是否为空
+      // if(!this.state.motto && (this.state.motto.length > 0)){
+
+      // }
+     
+      //Alert.alert('开始上传')
+      
+   }
+
+   _setIsUpdateTrue = ()=>{
+      this.setState ({
+          isProfileUpdate: true,
+          updateColor: 'white',
       })
    }
 }
@@ -271,6 +384,10 @@ const styles=StyleSheet.create({
       width:78,
       borderRadius: 39,
       resizeMode: 'cover',
+    },
+    avatarProgress:{
+     position: 'absolute',
+     top:0,
     },
     inputProfile: {
        //backgroundColor: 'pink',
