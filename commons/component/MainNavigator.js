@@ -7,6 +7,9 @@ import PostFlag from './PostFlag';
 import AMapScreen from './AMapScreen';
 import CommentScreen from './CommentScreen';
 import ProfileScreen from '../../app/screen/ProfileScreen';
+import SetScreen from '../../app/screen/SetScreen';
+import AccountAndSecurityScreen from '../../app/screen/AccountAndSecurityScreen';
+
 
 const MainRouters = {
     BottomNavigator: {
@@ -28,6 +31,15 @@ const MainRouters = {
     ProfileScreen: {
         name: 'ProfileScreen',
         screen: ProfileScreen,
+    },
+    //设置页面相关路由
+    SetScreen: {
+       name: 'SetScreen',
+       screen: SetScreen,
+    },
+    AccountAndSecurityScreen: {
+       name: 'AccountAndSecurityScreen',
+       screen: AccountAndSecurityScreen,
     }
 
 };

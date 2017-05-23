@@ -99,9 +99,6 @@ class FlagListScreen extends Component {
 		return(
          <View style={{flex:1}}>
               <Header navigation={navigation}/>
-              <Button title={'退出登录'} onPress={()=>{ 
-                 AsyncStorage.removeItem('user')
-              }}/>
               <PullToRefreshListView
                 ref={ (component) => this._pullToRefreshListView = component }
                 viewType={PullToRefreshListView.constants.viewType.listView}

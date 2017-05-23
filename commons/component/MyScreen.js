@@ -73,7 +73,7 @@ class MyScreen extends Component {
                      key={1}
                      title={'设置'}
                      leftIcon={{name: 'settings',type: 'material-community'}} 
-                     onPress={()=>{ Alert.alert('我的设置')}} />
+                     onPress={this._toSetScreen}/>
                </View>
            </View>
         </ScrollView>
@@ -83,7 +83,10 @@ class MyScreen extends Component {
   _toProfileScreen = () => {
      this.props.navigation.navigate('ProfileScreen')
   }
-
+  
+  _toSetScreen = () => {
+     this.props.navigation.navigate('SetScreen')
+  }
 }
 const styles = StyleSheet.create({
     container: {
